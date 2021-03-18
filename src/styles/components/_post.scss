@@ -3,16 +3,12 @@
     border-radius: 15px;
     margin-top: 1rem;
     padding: 1rem 0;
-    color: $light-grey;
-
-    .postbox__top{
-        border-bottom: none;
-        padding: 0;
-    }
+    color: $light-grey;   
 
     &__header,
     &__user-info-container,
-    &__user-info span
+    &__user-info span,
+    &__comment
     {
         display: flex;
         align-items: center;
@@ -111,4 +107,26 @@
             background-color: $background;
         }
     }
+
+    &__input-box-comment{
+        flex: 1;
+        background-color: $background;
+        border: 1px solid darken($color: $background, $amount: 5);
+        border-radius: 1.5rem;
+        margin-left: 5px;
+        
+
+        input{
+            border: none;
+            width: 100%;
+            background-color: transparent;
+            padding: 7px;
+
+            &:focus{
+                outline: none
+            }
+        }
+    }
+
+   
 }

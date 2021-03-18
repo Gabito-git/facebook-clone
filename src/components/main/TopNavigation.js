@@ -12,6 +12,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ModalLogout from './ModalLogout';
 import { useReducer } from 'react';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     small: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const TopNavigation = () => {
 
     const [isOpen, toggleModal] = useReducer(isOpen => !isOpen, false);
+    const { userPhoto, name } = useSelector(state => state.auth)
     const classes = useStyles();  
 
     return (
@@ -78,8 +80,11 @@ const TopNavigation = () => {
 
             <div className="navigation__right">
                 <div className="navigation__user-info">
-                    <Avatar className={ classes.small} />
-                    <p>Gabriel </p>
+                    <Avatar 
+                        className={ classes.small} 
+                        src={ userPhoto }
+                    />
+                    <p>{ name.split(" ")[0] } </p>
                 </div>
                 
                 <div className="navigation__right-icons">

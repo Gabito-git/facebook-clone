@@ -1,10 +1,24 @@
+import { useSelector } from "react-redux"
 import Post from "./Post"
 
 const PostScreen = () => {
+
+    const { posts } = useSelector(state => state.posts);
+
     return (
         <div>
-            <Post />
-            <Post />
+            
+            {
+                
+                posts.map( post => (
+                                <Post 
+                                    key={ post.id } 
+                                    {...post}
+                                />) 
+                )
+
+            }
+
         </div>
     )
 }

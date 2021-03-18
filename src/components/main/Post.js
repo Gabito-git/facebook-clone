@@ -13,19 +13,28 @@ const useStyles = makeStyles((theme) => ({
       }
 }))
 
-const Post = () => {
+const Post = ({
+    body,
+    postedImageUrl,
+    userImageUrl,
+    name, 
+    date
+  }) => {
 
     const classes = useStyles();
 
     return (
-        <div className="post">
+        <div className="post animate__animated animate__fadeInDown animate__faster">
 
             <div className="post__header">
-                <Avatar className={ classes.small}/>
+                <Avatar 
+                    className={ classes.small}
+                    src={ userImageUrl }
+                />
                 <div className="post__user-info-container">
                     <div className="post__user-info">
-                        <p>Gabriel Luis</p>
-                        <span>Hace un momento <PublicIcon color="inherit"/></span>
+                        <p>{ `${ name.split(" ")[0] } ${ name.split(" ")[1] }` }</p>
+                        <span>{ new Date( date?.toDate()).toUTCString() } <PublicIcon color="inherit"/></span>
                     </div>
                     <div  className="post__more">
                         <MoreHorizIcon fontSize="inherit"/>
@@ -34,12 +43,18 @@ const Post = () => {
             </div>
 
             <div className="post__message">                
-                <p> Este es un mensaje de prueba </p>
+                <p> { body } </p>
             </div>
 
-            <div className="post__image">
-                <img src="./assets/messageImg.jpg" alt="message"/>
-            </div>
+            {
+                postedImageUrl  
+                    &&
+                <div className="post__image">
+                    <img src={ postedImageUrl } alt="message"/>
+                </div>
+
+            }
+
 
             <div className="post__footer">
                 <div className="post__options">
@@ -59,9 +74,12 @@ const Post = () => {
                     </div>
                 </div>
 
-                <div className="postbox__top">
-                    <Avatar className={ classes.small}/>
-                    <div className="postbox__input-box">
+                <div className="post__comment">
+                    <Avatar 
+                        className={ classes.small}
+                        src={ userImageUrl }
+                    />
+                    <div className="post__input-box-comment">
                         <input placeholder="Escribe un comentario" />
                     </div>
                 </div>
