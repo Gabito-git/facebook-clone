@@ -22,11 +22,8 @@ const Postbox = () => {
     const { userPhoto, name } = useSelector(state => state.auth);
     const { modalPost } = useSelector(state => state.ui);
     const dispatch = useDispatch();
-    const classes = useStyles();
+    const classes = useStyles();   
 
-    // const handleNewPost = (e) => {
-    //     e.preventDefault();
-    // }
 
     const handleAddImage = () => {
         document.getElementById( 'image-input' ).click();

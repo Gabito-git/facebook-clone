@@ -33,9 +33,11 @@ const MainScreen = () => {
                     <Sidebar />
                 </aside>
                 <main className="mainscreen__center">
-                    <Histories />
-                    <Postbox />
-                    <PostScreen />
+                    <div className="mainscreen__center-content">
+                        <Histories />
+                        <Postbox />
+                        <PostScreen />
+                    </div>
                 </main>
                 <aside className="mainscreen__right">
                     <Widget />

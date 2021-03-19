@@ -13,7 +13,9 @@ const Widget = () => {
                     scrolling="no" 
                     frameBorder="0" 
                     allowFullScreen 
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                    className="widget__test"
+                >
                     
                 </iframe>
             </div>
