@@ -5,6 +5,8 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 import ForwardOutlinedIcon from '@material-ui/icons/ForwardOutlined';
+import ModalEditPost from './ModalEditPost';
+import { useReducer } from 'react';
 
 const useStyles = makeStyles((theme) => ({
     small: {
@@ -13,13 +15,11 @@ const useStyles = makeStyles((theme) => ({
       }
 }))
 
-const Post = ({
-    body,
-    postedImageUrl,
-    userImageUrl,
-    name, 
-    date
-  }) => {
+const Post = ({ post }) => {
+
+    const { body, postedImageUrl, userImageUrl, name, date} = post
+
+    const [edit, editToggle] = useReducer(edit => !edit, false);
 
     const classes = useStyles();
 
@@ -36,7 +36,10 @@ const Post = ({
                         <p>{ `${ name.split(" ")[0] } ${ name.split(" ")[1] }` }</p>
                         <span>{ new Date( date?.toDate()).toUTCString() } <PublicIcon color="inherit"/></span>
                     </div>
-                    <div  className="post__more">
+                    <div  
+                        className="post__more"
+                        onClick = { editToggle }
+                    >
                         <MoreHorizIcon fontSize="inherit"/>
                     </div>
                 </div>
@@ -85,6 +88,13 @@ const Post = ({
                 </div>
 
             </div>
+
+            {
+                edit 
+                 &&                
+                <ModalEditPost {...post} />
+            }
+
         </div>
     )
 }

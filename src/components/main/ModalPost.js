@@ -6,28 +6,29 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { closeModalPost } from '../../actions/ui';
 import { fileUpload } from '../../helpers/fileUpload';
-import { cleanActivePost, startNewPost, updateActivePost } from '../../actions/posts';
+import { cleanActivePost, startNewPost, startUpdatePost, updateActivePost } from '../../actions/posts';
 import { useEffect, useState } from 'react';
 
 const ModalPost = () => {
 
-    const { userPhoto, name } = useSelector(state => state.auth);
+    const { userPhoto, name, uid } = useSelector(state => state.auth);
     const { active } = useSelector(state => state.posts);
-    const [bodyPost, setBodyPost] = useState('');
+    const [bodyPost, setBodyPost] = useState(active.body);
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    useEffect(() => { 
 
         dispatch( updateActivePost( {
             name,
-            userImageUrl: userPhoto
+            userImageUrl: userPhoto,
+            uid
         } ) );
 
         return () =>{
             dispatch( cleanActivePost() );
         }
        
-    }, [dispatch, name, userPhoto])
+    }, [ dispatch, uid, name, userPhoto])
 
     const handleCloseModal = () => {
         dispatch( closeModalPost() );
@@ -51,7 +52,12 @@ const ModalPost = () => {
             body: bodyPost
         } ) );
 
-        dispatch( startNewPost( active ) );
+        if( !active.id ){
+            dispatch( startNewPost( active ) );
+        }else{
+            dispatch( startUpdatePost( active ) );
+        }
+
 
         dispatch( closeModalPost() );
 

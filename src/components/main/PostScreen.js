@@ -13,7 +13,7 @@ const PostScreen = () => {
                 posts.map( post => (
                                 <Post 
                                     key={ post.id } 
-                                    {...post}
+                                    post={ post }
                                 />) 
                 )
 

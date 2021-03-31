@@ -8,14 +8,44 @@ export const startNewPost = () => {
     
        return (dispatch, getState) => {
             
-             const { posts:{active} } = getState();           
+            const { posts:{active} } = getState();
 
             dbReference.add({
-                ...active, 
+                ...active,             
                 date: firebase.firestore.FieldValue.serverTimestamp()
             })
 
        }
+
+}
+
+export const startDeletePost = ( id ) => {
+
+    return () => {
+
+        dbReference.doc( id )
+                   .delete();
+
+    }
+
+}
+
+export const startUpdatePost = () => {   
+  
+
+    return (dispatch, getState) => {
+
+        const { posts:{active} } = getState();
+        const id = active.id;
+        delete active.id;
+
+        dbReference.doc( id )
+                   .update( {
+                       ...active,
+                       date: firebase.firestore.FieldValue.serverTimestamp()
+                   } );
+
+    }
 
 }
 

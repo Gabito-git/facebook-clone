@@ -3,7 +3,9 @@
     border-radius: 15px;
     margin-top: 1rem;
     padding: 1rem 0;
-    color: $light-grey;   
+    color: $light-grey;  
+    position: relative; 
+    z-index: 0;
 
     &__header,
     &__user-info-container,
